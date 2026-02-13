@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You Palak ❤️</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', cursive;
+    background: linear-gradient(135deg,#ff6a88,#ff99ac);
+    overflow:hidden;
+    text-align:center;
+    color:white;
+}
+
+.page{
+    display:none;
+    height:100vh;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    position:relative;
+}
+.active{ display:flex; }
+
+h1{ font-size:38px; }
+
+.heartbeat{
+    animation: beat 1s infinite;
+}
+@keyframes beat{
+    0%,100%{ transform:scale(1);}
+    50%{ transform:scale(1.2);}
+}
+
+p{
+    font-size:20px;
+    max-width:300px;
+}
+
+.teddy{
+    font-size:70px;
+    margin:15px;
+}
+
+.kiss{
+    animation: kissMove 2s infinite alternate;
+}
+@keyframes kissMove{
+    from{ transform: translateX(0);}
+    to{ transform: translateX(25px);}
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:white;
+    color:red;
+    font-size:16px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+#hmmBtn{
+    position:absolute;
+}
+
+/* Floating Up Hearts */
+.floatHeart{
+    position:absolute;
+    animation: floatUp 5s linear infinite;
+    color:red;
+}
+@keyframes floatUp{
+    from{ transform:translateY(100vh); opacity:1;}
+    to{ transform:translateY(-10vh); opacity:0;}
+}
+
+/* Falling Animation */
+.fall{
+    position:absolute;
+    animation: fallDown 6s linear infinite;
+}
+@keyframes fallDown{
+    from{ transform:translateY(-10vh); opacity:1;}
+    to{ transform:translateY(110vh); opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+    <h1>For You Palak 💕</h1>
+    <div>
+        <span class="teddy kiss">🧸</span>
+        <span class="teddy">🧸</span>
+    </div>
+    <p>તું મારી જિંદગી નો સૌથી સુંદર ભાગ છે 💖  
+    તારું સ્મિત મારી દુનિયા છે ✨</p>
+    <button onclick="nextPage(2)">Next ➡</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+    <h1>Happy Valentine Day My Love 🌹</h1>
+    <div>
+        <span class="teddy">🧸</span>
+        <span class="teddy">🌹🧸</span>
+    </div>
+    <p>તારા વગર જીવન અધૂરું છે ❤️  
+    તું મારી ખુશી અને મારું પ્રેમ છે 💕</p>
+    <button onclick="nextPage(3)">Next ➡</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+    <h1 class="heartbeat">I Love You Palak ❤️</h1>
+    <div class="teddy">🧸💞🧸</div>
+    <p>હંમેશા મારી સાથે રહેજે 💖  
+    તું જ મારું બધું છે, Palak 💕✨</p>
+
+    <button onclick="goOut()">I Love You Too 💖</button>
+    <button id="hmmBtn">Hmm 😜</button>
+</div>
+
+<script>
+
+function nextPage(pageNumber){
+    document.querySelectorAll('.page').forEach(page=>{
+        page.classList.remove('active');
+    });
+    document.getElementById('page'+pageNumber).classList.add('active');
+}
+
+/* Exit link function */
+function goOut(){
+    window.location.href = "https://www.google.com"; 
+    // 👆 Yaha tum apna link dal sakte ho
+}
+
+/* Floating Up Hearts */
+function createFloatHeart(){
+    const heart = document.createElement('div');
+    heart.classList.add('floatHeart');
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100+"vw";
+    heart.style.fontSize = Math.random()*20+15+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},5000);
+}
+setInterval(createFloatHeart,500);
+
+/* Falling Roses & Hearts */
+function createFalling(){
+    const item = document.createElement('div');
+    item.classList.add('fall');
+
+    const symbols = ["🌹","💖"];
+    item.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+
+    item.style.left = Math.random()*100+"vw";
+    item.style.fontSize = Math.random()*25+20+"px";
+    item.style.animationDuration = Math.random()*3+4+"s";
+
+    document.body.appendChild(item);
+    setTimeout(()=>{item.remove();},6000);
+}
+setInterval(createFalling,400);
+
+/* Hmm button run away */
+const hmmBtn = document.getElementById("hmmBtn");
+
+hmmBtn.addEventListener("mouseover", moveButton);
+hmmBtn.addEventListener("touchstart", moveButton);
+
+function moveButton(){
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    hmmBtn.style.left = x + "px";
+    hmmBtn.style.top = y + "px";
+}
+
+</script>
+
+</body>
+</html>
